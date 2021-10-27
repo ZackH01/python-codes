@@ -2,6 +2,13 @@
 Class for a circular queue data structure
 
 Data is only added to the rear and removed from the front
+
+Construct: identifier = Queue(size) #size is an integer
+
+enqueue(item) adds input value to the back of the queue if it is not full
+dequeue() removes and returns the value at the front of the queue if it is not empty
+peek() returns the value at the front of the queue if it is not empty
+view() returns the queue's contents
 """
 
 
@@ -47,10 +54,16 @@ class Queue:
         print(self.data)
         return result
 
+    def peek(self):
+        #Returns the front item if the queue is not empty
+        if self.front_pointer == self.rear_pointer:
+            print("Queue is empty")
+            return
+        else:
+            return self.data[self.front_pointer]
 
-queue = Queue(5)
-queue.enqueue(1)
-queue.enqueue(2)
-queue.dequeue()
-queue.dequeue()
-queue.dequeue()
+    def view(self):
+        #Returns the queue's contents
+        return self.data
+
+
