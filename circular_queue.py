@@ -11,7 +11,6 @@ peek() returns the value at the front of the queue if it is not empty
 view() returns the queue's contents
 """
 
-
 class Queue:
     #Attributes
     data = []
@@ -23,10 +22,25 @@ class Queue:
     def __init__(self, size):
         #Constructor
         self.size = size
-        self.data = [None]*self.size
+
+        #Validate input and initialise queue
+        try:
+            int(self.size)
+        except ValueError:
+            raise ValueError("Size parameter must be an integer") from None
+        else:
+            if self.size < 0:
+                raise ValueError("Size parameter must be 0 or greater") from None
+            else:
+                self.data = [None]*self.size
 
     def enqueue(self, item):
         #Adds item to the rear of the queue if the queue is not full
+        try:
+            self.data[self.rear_pointer]
+        except IndexError:
+            raise IndexError("Queue size is zero") from None
+
         if self.data[self.rear_pointer] == None:
             self.data[self.rear_pointer] = item
             self.rear_pointer += 1
@@ -34,14 +48,12 @@ class Queue:
             if self.rear_pointer > self.size-1:
                 self.rear_pointer = 0
         else:
-            print("Queue is full")
-        
-        print(self.data)
+            raise IndexError("Queue is full") from None
 
     def dequeue(self):
         #Removes and returns front item if the queue is not empty
         if self.front_pointer == self.rear_pointer:
-            print("Queue is empty")
+            raise IndexError("Queue is empty") from None
             return
         else:
             result = self.data[self.front_pointer]
@@ -51,13 +63,12 @@ class Queue:
             if self.front_pointer > self.size-1:
                 self.front_pointer = 0
                 
-        print(self.data)
         return result
 
     def peek(self):
         #Returns the front item if the queue is not empty
         if self.front_pointer == self.rear_pointer:
-            print("Queue is empty")
+            raise IndexError("Queue is empty") from None
             return
         else:
             return self.data[self.front_pointer]
