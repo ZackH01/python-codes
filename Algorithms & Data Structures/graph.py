@@ -40,12 +40,3 @@ class Graph:
             if edge not in self.edges:
                 self.edges.append(edge)
 
-
-my_graph = Graph()
-my_graph.add_node()
-my_graph.add_node()
-my_graph.add_node()
-my_graph.add_edge(0, 1)
-my_graph.add_edge(0, 2)
-print(my_graph.nodes)
-print(my_graph.edges)
